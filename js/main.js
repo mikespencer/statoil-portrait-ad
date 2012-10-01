@@ -21,7 +21,7 @@
   //get top slate article:
   $.getJSON('//www.slate.com/articles/arts/culturebox.teaser.all.2.json', function(data){ //FOR TESTING
   //$.getJSON('js/feed.json', function(data){ //FOR TESTING
-  //$.getJSON('//www.slate.com/articles/health_and_science/human_evolution_what_makes_humans_human.teaser.all.2.json', function(data){
+  //$.getJSON('//www.slate.com/articles/health_and_science/human_evolution.teaser.all.2.json', function(data){
     if(data && data.entries){
       var entry = data.entries[Math.floor(Math.random()*data.entries.length)];
       $('#statoil_article_main', $container).attr({href: wpAd.statoil_vars.clickTrack + entry.link}).empty().append('<img src="' + entry.media[0].thumbnails[0].url + '" width="272" alt="" />');
