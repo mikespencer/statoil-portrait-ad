@@ -1,0 +1,97 @@
+﻿#statoil_portrait_ad{
+  padding:0;
+  margin:0;
+  border:0;
+  overflow:hidden;
+  line-height:normal;
+  font-size:12px;
+  font-weight:normal;
+  color:#fff;
+  background-color:#1a1b1a;
+  font-family:arial, sans-serif;
+  font-style:none;
+  width:300px;
+  min-height:1050px;
+  text-align:left;
+}
+#statoil_portrait_ad p{
+  margin:0;
+}
+#statoil_portrait_ad a{
+  color:#fff;
+  text-decoration:none;
+}
+#statoil_portrait_ad img{
+  border:0;
+}
+#statoil_portrait_ad #statoil_article_headline{
+  font-size:14px;
+  padding-bottom:10px;
+  border-bottom:1px solid #999;
+  margin:8px 0 14px;
+  display:block;
+}
+#statoil_portrait_ad #statoil_subhead{
+  width:200px;
+  height:13px;
+  background-position: -10px -318px;
+  margin:10px 0;
+}
+#statoil_portrait_ad #statoil_top{
+  background-position: -10px -10px;
+  width:300px;
+  height:288px;
+}
+#statoil_portrait_ad #statoil_partners{
+  background-position:-10px -351px;
+  width:300px;
+  height:88px;
+}
+#statoil_portrait_ad #statoil_linkedin{
+  background-position:-10px -434px;
+  width:300px;
+  height:88px;
+}
+#statoil_portrait_ad .sprite{
+  display:block;
+  text-indent:-9999px;
+  background-image:url(http://img.wpdigital.net/wp-adv/advertisers/statoil/2012/img/sprite.png);
+  background-repeat:no-repeat;
+}
+#statoil_portrait_ad .bold{
+  font-weight:bold;
+}
+#statoil_portrait_ad .inner{
+  padding:0 14px;
+  display:block;
+}
+#statoil_portrait_ad .center{
+  margin:0 auto;
+}
+#statoil_portrait_ad .spin{
+  display:block;
+  height:100px;
+}
+#statoil_portrait_ad .clear{
+  clear:both;
+}
+#statoil_portrait_ad .text-center{
+  text-align:center;
+}
+#statoil_portrait_ad .statoil-article{
+  margin:10px 0;
+  display:block;
+}
+#statoil_portrait_ad .statoil-article p{
+  padding-left:103px;
+}
+#statoil_portrait_ad .statoil-article img{
+  float:left;
+  margin-bottom:10px;
+}
+#statoil_portrait_ad .statoil-article .source{
+  color:#999;
+  font-style:italic;
+  font-size:11px;
+  font-family:arial, sans-serif;
+}
