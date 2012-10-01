@@ -19,14 +19,15 @@
   };
 
   //get top slate article:
+  $.getJSON('//www.slate.com/articles/arts/culturebox.teaser.all.2.json', function(data){ //FOR TESTING
+  //$.getJSON('js/feed.json', function(data){ //FOR TESTING
   //$.getJSON('//www.slate.com/articles/health_and_science/human_evolution_what_makes_humans_human.teaser.all.2.json', function(data){
-  $.getJSON('js/feed.json', function(data){
     if(data && data.entries){
       var entry = data.entries[Math.floor(Math.random()*data.entries.length)];
       $('#statoil_article_main', $container).attr({href: wpAd.statoil_vars.clickTrack + entry.link}).empty().append('<img src="' + entry.media[0].thumbnails[0].url + '" width="272" alt="" />');
       $('#statoil_article_headline', $container).attr({href: wpAd.statoil_vars.clickTrack + entry.link}).append(entry.menuline);
     } else {
-      $('#statoil_article_main, #statoil_article_headline', $container).html('');
+      $('#statoil_article_main, #statoil_article_headline', $container).empty();
     }
   });
 
@@ -45,12 +46,12 @@
         if(excerpt.length > char_lim){
           excerpt = excerpt.substr(0, char_lim) + '&hellip;';
         }
-        html.push('<a class="statoil-article clear" href="' + wpAd.statoil_vars.clickTrack + item.json.url + '" target="_blank"><img src="' + item.json.image + '" width="94" height="70" alt="test" /><p class="bold">' + item.json.content_title + '</p><p>'  + excerpt + '</p></a>');
+        html.push('<a class="statoil-article clear" href="' + wpAd.statoil_vars.clickTrack + item.json.url + '" target="_blank"><img src="' + item.json.image + '" width="94" height="70" alt="" /><p class="bold">' + item.json.content_title + '</p><p>'  + excerpt + '</p></a>');
       });
       $('#statoil_articles_bottom', $container).empty().append(html.join(''));
     }
   });
-  
+
   function startSpinners(){
     if(w.Spinner){
       $('div.spin', $container).each(function(){
@@ -65,7 +66,7 @@
     }
     return false;
   }
-  
+
   if(!startSpinners()){
     $(startSpinners);
   }
