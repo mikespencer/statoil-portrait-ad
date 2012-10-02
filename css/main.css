@@ -40,7 +40,12 @@
 #statoil_portrait_ad #statoil_top{
   background-position: -10px -10px;
   width:300px;
-  height:288px;
+  height:127px;
+}
+#statoil_portrait_ad #statoil_big_questions{
+  background-position: -10px -137px;
+  width:300px;
+  height:161px;
 }
 #statoil_portrait_ad #statoil_partners{
   background-position:-10px -351px;
