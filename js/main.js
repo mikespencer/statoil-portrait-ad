@@ -9,7 +9,7 @@
   if(!$){return false;}
   
   var $container = $('#statoil_portrait_ad'),
-    geoconsensus_url = 'http://geoconsensusdata.com/api/1.0/erp/content?theme=erp4DBD10A39FEAF917F&key=1bDVQEbP&image=true&excerpt=true',
+    geoconsensus_url = 'http://geoconsensusdata.com/api/1.0/erp/content?theme=erp4DBD10A39FEAF917F&image=true&excerpt=true&element=article+author&key=1bDVQEbP',
     yql_base = 'http://query.yahooapis.com/v1/public/yql';
 
   //randomly sort array:
@@ -33,7 +33,7 @@
 
   //get geoconsensus articles:
   $.getJSON(yql_base + '?callback=?', {
-    q: 'select json.content_title, json.url, json.image,json.excerpt from json where url="' + geoconsensus_url + '"',
+    q: 'select json.content_title, json.url, json.image, json.excerpt, json.element from json where url="' + geoconsensus_url + '"',
     format: 'json',
     max_age: '3600'
   }, function(arg){
@@ -42,11 +42,13 @@
     if(data){
       data = data.shuffle().slice(0,3);
       $.each(data, function(i, item){
-        var excerpt = item.json.excerpt && item.json.excerpt.replace(/&lt;.*?&gt;/ig, '') || '', char_lim = 75;
+        var excerpt = item.json.excerpt && item.json.excerpt.replace(/&lt;.*?&gt;/ig, '') || '',
+          char_lim = 55,
+          source = item.json.element ? '<p class="source">From ' + item.json.element + '</p>' : '';
         if(excerpt.length > char_lim){
           excerpt = excerpt.substr(0, char_lim) + '&hellip;';
         }
-        html.push('<a class="statoil-article clear" href="' + wpAd.statoil_vars.clickTrack + item.json.url + '" target="_blank"><img src="' + item.json.image + '" width="94" height="70" alt="" /><p class="bold">' + item.json.content_title + '</p><p>'  + excerpt + '</p></a>');
+        html.push('<a class="statoil-article clear" href="' + wpAd.statoil_vars.clickTrack + item.json.url + '" target="_blank"><img src="' + item.json.image + '" width="94" height="70" alt="" /><p class="bold">' + item.json.content_title + '</p><p>'  + excerpt + '</p>'+ source +'</a>');
       });
       $('#statoil_articles_bottom', $container).empty().append(html.join(''));
     }
