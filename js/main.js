@@ -10,7 +10,8 @@
   
   var $container = $('#statoil_portrait_ad'),
     geoconsensus_url = 'http://geoconsensusdata.com/api/1.0/erp/content?theme=erp4DBD10A39FEAF917F&image=true&excerpt=true&element=article+author&key=1bDVQEbP',
-    yql_base = 'http://query.yahooapis.com/v1/public/yql';
+    yql_base = 'http://query.yahooapis.com/v1/public/yql',
+    slate_feed = (/slate\.com/.test(document.domain) ? '//www.slate.com/articles/health_and_science/' : 'js/') + 'human_evolution.teaser.all.2.json';
 
   //randomly sort array:
   Array.prototype.shuffle = function(){
@@ -19,9 +20,7 @@
   };
 
   //get top slate article:
-  //$.getJSON('//www.slate.com/articles/arts/culturebox.teaser.all.2.json', function(data){ //FOR TESTING
-  //$.getJSON('js/feed.json', function(data){ //FOR TESTING
-  $.getJSON('//www.slate.com/articles/health_and_science/human_evolution.teaser.all.2.json', function(data){
+  $.getJSON(slate_feed, function(data){
     if(data && data.entries){
       var entry = data.entries[Math.floor(Math.random()*data.entries.length)];
       $('#statoil_article_main', $container).attr({href: wpAd.statoil_vars.clickTrack + entry.link}).empty().append('<img src="' + entry.media[0].thumbnails[0].url + '" width="272" alt="" />');
