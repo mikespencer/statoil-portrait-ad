@@ -2,7 +2,7 @@
   * @author michael.spencer@washingtonpost.com (Mike Spencer)
   * @fileoverview custom portrait unit for Statoil
   */
-(function(w, $, wpAd){
+(function(w, d, $, wpAd){
 
   'use strict';
   
@@ -11,7 +11,7 @@
   var $container = $('#statoil_portrait_ad'),
     geoconsensus_url = 'http://geoconsensusdata.com/api/1.0/erp/content?theme=erp4DBD10A39FEAF917F&image=true&excerpt=true&element=article+author&key=1bDVQEbP',
     yql_base = 'http://query.yahooapis.com/v1/public/yql',
-    slate_feed = (/slate\.com/.test(document.domain) ? '//www.slate.com/articles/health_and_science/' : 'js/') + 'human_evolution.teaser.all.2.json';
+    slate_feed = (/slate\.com/.test(d.domain) ? '//www.slate.com/articles/health_and_science/' : 'js/') + 'human_evolution.teaser.all.2.json';
 
   //randomly sort array:
   Array.prototype.shuffle = function(){
@@ -30,12 +30,22 @@
     }
   });
 
-  //get geoconsensus articles:
-  $.getJSON(yql_base + '?callback=?', {
-    q: 'select json.content_title, json.url, json.image, json.excerpt, json.element from json where url="' + geoconsensus_url + '"',
-    format: 'json',
-    max_age: '3600'
-  }, function(arg){
+  //get geoconsensus articles:  
+  $.ajax({
+    url: yql_base,
+    data: {
+      'q': 'select json.content_title, json.url, json.image, json.excerpt, json.element from json where url="' + geoconsensus_url + '"',
+      'format': 'json',
+      '_maxage': '86400'
+    },
+    cache: true,
+    dataType: 'jsonp',
+    jsonp: 'callback',
+    jsonpCallback: 'wpAd.natGeoCB'
+  });
+  
+  //geoconsensus JSONP callback:
+  wpAd.natGeoCB = function(arg){
     var data = arg && arg.query && arg.query.results && arg.query.results.json || false,
       html = [];
     if(data){
@@ -51,7 +61,19 @@
       });
       $('#statoil_articles_bottom', $container).empty().append(html.join(''));
     }
-  });
+  };
+  
+  function addPixel(arg){
+    $(d.createElement('img')).attr({
+      'width': '1',
+      'height': '1',
+      'src': arg.replace(/\[timestamp\]|\[random\]|\%n/gi, Math.floor(Math.random()*1E9)),
+      'alt': arguments[1] || 'pixel'
+    }).css({
+      'border': '0',
+      'display': 'none'
+    }).appendTo($container);
+  }
 
   function startSpinners(){
     if(w.Spinner){
@@ -71,5 +93,8 @@
   if(!startSpinners()){
     $(startSpinners);
   }
-
-})(window, window.jQuery, wpAd);
+  
+  //render impression pixel
+  addPixel('http://statoil.solution.weborama.fr/fcgi-bin/adserv.fcgi?tag=827433&f=10&h=R&rnd=[RANDOM]', 'impression pixel');
+  
+})(window, document, window.jQuery, wpAd);
